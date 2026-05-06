@@ -1,0 +1,7 @@
+smvenv/
+_pycache__/
+*.pyc   
+
+.DS_Store
+*.log   
+Thumbs.db
