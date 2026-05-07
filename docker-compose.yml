@@ -1,0 +1,29 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      # optional telegram (set in .env or here)
+      - BOT_TOKEN=${BOT_TOKEN:-}
+      - CHAT_ID=${CHAT_ID:-}
+    volumes:
+      # Persist captures + DB
+      - ./outputs:/app/outputs
+      - ./backend/surveillance.db:/app/backend/surveillance.db
+    # Camera passthrough is OS-dependent.
+    # Use docker-compose.webcam.linux.yml on Linux for /dev/video0 mapping,
+    # or set an RTSP source in the app (recommended for Docker on Windows/macOS).
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_BASE_URL=http://backend:8001
+    depends_on:
+      - backend

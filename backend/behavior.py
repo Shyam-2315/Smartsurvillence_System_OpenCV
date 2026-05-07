@@ -5,7 +5,7 @@ entry_times = {}
 LOITER_TIME = 10  # seconds
 STALE_TRACK_TIMEOUT = 3  # seconds
 
-def detect_loitering(tracks):
+def detect_loitering(tracks, loiter_time_sec: float = LOITER_TIME):
     alerts = []
 
     current_time = time.time()
@@ -26,7 +26,7 @@ def detect_loitering(tracks):
 
         duration = current_time - entry_times[track_id]
 
-        if duration > LOITER_TIME:
+        if duration > float(loiter_time_sec):
             alerts.append((track_id, duration))
 
     return alerts

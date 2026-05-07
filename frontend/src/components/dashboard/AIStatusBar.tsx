@@ -13,6 +13,7 @@ export function AIStatusBar() {
   const objects = data?.tracks ?? 0;
   const threat =
     (data?.active_alerts ?? 0) > 0 ? "ELEVATED" : data?.camera_online && data?.ai_online ? "LOW" : "UNKNOWN";
+  const fps = data?.ai_fps ?? (data?.last_inference_ms ? Math.max(1, Math.round(1000 / data.last_inference_ms)) : null);
 
   return (
     <motion.div
@@ -41,6 +42,16 @@ export function AIStatusBar() {
           <span className="text-muted-foreground">Threat:</span>
           <span className="rounded-md border border-warning/40 bg-warning/10 px-1.5 py-0.5 text-warning">{threat}</span>
         </span>
+        {fps !== null && (
+          <span className="hidden items-center gap-1.5 text-muted-foreground md:inline-flex">
+            <span className="text-muted-foreground">FPS:</span> <span className="font-semibold text-foreground">{fps}</span>
+          </span>
+        )}
+        {typeof data?.gpu_mem_mb === "number" && (
+          <span className="hidden items-center gap-1.5 text-muted-foreground lg:inline-flex">
+            <span className="text-muted-foreground">VRAM:</span> <span className="font-semibold text-foreground">{data.gpu_mem_mb} MB</span>
+          </span>
+        )}
       </div>
     </motion.div>
   );
