@@ -5,3 +5,9 @@ _pycache__/
 .DS_Store
 *.log   
 Thumbs.db
+
+.env
+backend/alerts.db
+outputs/*.jpg
+outputs/*.jpeg
+outputs/*.png
