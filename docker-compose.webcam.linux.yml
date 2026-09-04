@@ -1,0 +1,6 @@
+services:
+  backend:
+    # Linux-only webcam passthrough
+    devices:
+      - "/dev/video0:/dev/video0"
+

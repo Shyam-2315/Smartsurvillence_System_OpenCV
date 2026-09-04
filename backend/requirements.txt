@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+requests
+opencv-python-headless
+ultralytics
+deep-sort-realtime
+PyJWT
+bcrypt
+Pillow
+python-multipart
+pymavlink
+# OCR runs locally and does not require a native Tesseract installation.
+easyocr
+# deep-sort-realtime currently imports pkg_resources, removed by newer setuptools.
+setuptools<81

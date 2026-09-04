@@ -1,0 +1,17 @@
+[Unit]
+Description=VAYU-X read-only Raspberry Pi companion
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=vayu
+WorkingDirectory=/opt/vayu-companion
+EnvironmentFile=/etc/vayu-companion.env
+ExecStart=/opt/vayu-companion/.venv/bin/python -m companion.main
+Restart=on-failure
+RestartSec=10
+# No reboot directives: a failed companion must not create reboot loops.
+
+[Install]
+WantedBy=multi-user.target
